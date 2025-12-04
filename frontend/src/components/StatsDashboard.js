@@ -1,30 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import './StatsDashboard.css';
-import { apiService } from '../services/apiService';
+import { useStats } from '../hooks/useStats';
 
 const StatsDashboard = () => {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    data: stats,
+    isLoading,
+    isError,
+    error,
+    isFetching,
+  } = useStats();
 
-  // TODO: Implement fetchStats function
-  useEffect(() => {
-    const fetchStats = async () => {
-      setLoading(true);
-      try {
-        // TODO: Call apiService.getStats()
-        // TODO: Update stats state
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
+  const formatNumber = useCallback((num) => {
+    if (num === null || num === undefined) return '0';
+    return num.toLocaleString('en-US');
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="stats-dashboard-container">
         <div className="loading">Loading statistics...</div>
@@ -32,25 +24,60 @@ const StatsDashboard = () => {
     );
   }
 
-  if (error || !stats) {
+  if (isError || !stats) {
     return (
       <div className="stats-dashboard-container">
-        <div className="error">Error loading statistics: {error || 'No data available'}</div>
+        <div className="error">
+          Error loading statistics: {error?.message || 'No data available'}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="stats-dashboard-container">
-      <h2>Platform Statistics</h2>
+      <div className="stats-header">
+        <h2>Platform Statistics</h2>
+        {isFetching && (
+          <span className="updating-indicator">Updating...</span>
+        )}
+      </div>
       
-      {/* TODO: Display statistics in a nice grid layout */}
-      {/* Show: totalPatients, totalRecords, totalConsents, activeConsents, pendingConsents, totalTransactions */}
       <div className="stats-grid">
-        {/* Your implementation here */}
-        <div className="placeholder">
-          <p>Statistics will be displayed here</p>
-          <p>Implement the statistics dashboard</p>
+        <div className="stat-card primary">
+          <div className="stat-label">Total Patients</div>
+          <div className="stat-value">{formatNumber(stats.totalPatients)}</div>
+          <div className="stat-description">Registered patients in the system</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-label">Total Records</div>
+          <div className="stat-value">{formatNumber(stats.totalRecords)}</div>
+          <div className="stat-description">Medical records stored</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-label">Total Consents</div>
+          <div className="stat-value">{formatNumber(stats.totalConsents)}</div>
+          <div className="stat-description">All consent records</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-label">Active Consents</div>
+          <div className="stat-value">{formatNumber(stats.activeConsents)}</div>
+          <div className="stat-description">Currently active consents</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-label">Pending Consents</div>
+          <div className="stat-value">{formatNumber(stats.pendingConsents)}</div>
+          <div className="stat-description">Awaiting activation</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-label">Total Transactions</div>
+          <div className="stat-value">{formatNumber(stats.totalTransactions)}</div>
+          <div className="stat-description">Blockchain transactions</div>
         </div>
       </div>
     </div>
