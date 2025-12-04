@@ -16,6 +16,36 @@
   font-size: 1.5rem;
 }
 
+.wallet-filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-toggle {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #666;
+}
+
+.filter-toggle:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.filter-toggle.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
 .wallet-filter {
   padding: 0.5rem 1rem;
   background: #e3f2fd;
@@ -131,6 +161,10 @@
   word-break: break-all;
   color: #999;
   font-size: 0.85rem;
+}
+
+.transaction-detail-item.full-width {
+  grid-column: 1 / -1;
 }
 
 .transaction-amount {
