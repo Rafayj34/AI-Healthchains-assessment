@@ -258,6 +258,13 @@
   font-size: 1.1rem;
 }
 
+.error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  color: #d32f2f;
+}
+
 .placeholder {
   text-align: center;
   padding: 3rem;
