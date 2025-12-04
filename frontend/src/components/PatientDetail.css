@@ -77,6 +77,10 @@
   color: #667eea;
 }
 
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
 .records-list {
   display: flex;
   flex-direction: column;
@@ -187,6 +191,16 @@
   padding: 2rem;
   color: #999;
   font-style: italic;
+}
+
+.record-hash {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+  color: #999;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
 }
 
 @media (max-width: 768px) {

@@ -146,6 +146,34 @@
   font-size: 0.9rem;
 }
 
+.retry-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.retry-btn:hover {
+  background-color: #5568d3;
+  transform: translateY(-1px);
+}
+
+.fetching-indicator {
+  text-align: center;
+  padding: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pagination-total {
+  margin-left: 0.5rem;
+  color: #999;
+}
+
 @media (max-width: 768px) {
   .patient-list {
     grid-template-columns: 1fr;
